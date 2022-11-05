@@ -2,8 +2,8 @@
 import sys
 import time
 
-import common.process_input
-from common.import_utils import import_module
+import aoc.common.process_input
+from aoc.common.import_utils import import_module
 
 n = len(sys.argv)
 if n != 4:
@@ -14,14 +14,17 @@ year = sys.argv[1]
 day = sys.argv[2]
 part = sys.argv[3]
 
-module_name = "year" + year + ".day" + day 
+module_name = "aoc.year" + year + ".day" + day 
 module = import_module(module_name)
 
 # record start time
 start = time.time()
 
-file_content = common.process_input.read_file("input\\year" + year + "\\day" + day + "\\input.txt")        
-input_content = common.process_input.to_function_list(file_content, int)
+file_content = aoc.common.process_input.read_file("input\\year" + year + "\\day" + day + "\\input.txt")  
+process_function = int
+if year == "2021" and day == "22":
+    process_function = aoc.common.process_input.process_reboot_steps_line      
+input_content = aoc.common.process_input.to_function_list(file_content, process_function)
 if part == "1":
     result = module.calculate_part1(input_content)
 else:
