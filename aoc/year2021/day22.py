@@ -1,64 +1,33 @@
 # aoc.year2021.day22
+from aoc.year2021.cuboid import Cuboid
 
-def process_reboot_steps_line(file_line):
-    '''
-    transform this: 
-    on x=10..12,y=10..12,z=10..12
-    into:
-    {
-        "status": "on",
-        "x": (10, 12),
-        "y": (10, 12),
-        "z": (10, 12)
-    }
-    '''
-    result_dict = dict()
-
-    first_split_result = file_line.split(" ") # split on x=10..12,y=10..12,z=10..12
-    result_dict["status"] = first_split_result[0]
-
-    second_split_result = first_split_result[1].split(",") # split each coordinate
-    for split_result in second_split_result:
-        third_split_result = split_result.split("=") # split coordenate from values
-        coordenate = third_split_result[0]
-        fourth_split_result = third_split_result[1].split("..") # split min and max values
-        min_value = int(fourth_split_result[0])
-        max_value = int(fourth_split_result[1])
-        result_dict[coordenate] = (min_value, max_value)
-
-    return result_dict
-
-def process_reboot_steps(file_content):
-    '''
-    transform this: 
-    on x=10..12,y=10..12,z=10..12
-    off x=9..11,y=9..11,z=9..11
-    into:
-    [
-        {
-            "status": "on",
-            "x": (10, 12),
-            "y": (10, 12),
-            "z": (10, 12)
-        },
-        {
-            "status": "off",
-            "x": (9, 11),
-            "y": (9, 11),
-            "z": (9, 11)
-        }
-    ]
-    '''
-    result = []
-    file_lines = file_content.splitlines()
-    for line in file_lines:
-        value = process_reboot_steps_line(line.strip())
-        result.append(value)
-    return result
+def set_and_expand_cuboid(c, min_x, max_x, min_y, max_y, min_z, max_z, state):
+    # this is the brute force approach, there may be optimization if approaching one axis at a time
+    for x in range(min_x, max_x+1):
+        for y in range(min_y, max_y+1):
+            for z in range(min_z, max_z+1):
+                c.set_and_expand(x, y, z, 0, state)
+    return c
 
 def calculate_part1(input_list):
-    
-    return 0
+    first = input_list.pop(0) # get first instruction
+    first_state = 1
+    if first['status'] == "off":
+        first_state = 0
+    processor = Cuboid(first['x'][0], first['x'][1], first['y'][0], first['y'][1], first['z'][0], first['z'][1], first_state)
+    # processor.print()
+    for i in input_list:
+        i_state = 1
+        if i['status'] == "off":
+            i_state = 0
+        # check if within the limits
+        if i['x'][0] > 50 or i['x'][0] < -50: 
+            continue # skip
+        processor = set_and_expand_cuboid(processor, i['x'][0], i['x'][1], i['y'][0], i['y'][1], i['z'][0], i['z'][1], i_state)
+        # print(i)
+        # processor.print()
+    result = processor.count_state()
+    return result
 
 
 def calculate_part2(input_list):
