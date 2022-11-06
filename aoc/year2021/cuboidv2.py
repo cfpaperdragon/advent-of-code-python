@@ -35,6 +35,25 @@ class Cuboid:
         print(cuboid_to_str)
 
 
+    def copy(self):
+        c = Cuboid(self.min_x, self.max_x, self.min_y, self.max_y, self.min_z, self.max_z, self.state)
+        return c
+
+
+    def split(self, axis, value):
+        c1 = self.copy()
+        c2 = self.copy()
+        if axis == 'x':
+            c1.max_x = value
+            c2.min_x = value + 1 # so they don't intersect
+        if axis == 'y':
+            c1.max_y = value
+            c2.min_y = value + 1
+        if axis == 'z':
+            c1.max_z = value
+            c2.min_z = value + 1
+        return [c1, c2]
+
 def cuboid_intersect_x(c1, c2):
     return (c2.min_x >= c1.min_x and c2.min_x <= c1.max_x) or (c2.max_x >= c1.min_x and c2.max_x <= c1.max_x)
 
@@ -53,3 +72,37 @@ def cuboid_intersect(c1, c2):
     if cuboid_intersect_z(c1, c2):
         result.append('z')
     return result
+
+
+def cuboid_intersect_and_split_x(c1, c_list):
+    # this is very complicated
+    return
+
+
+
+def intersect_and_split(c1, c2):
+    intersect_result = cuboid_intersect(c1, c2)
+    if len(intersect_result) == 0:
+        return [c1, c2]
+    return_list = [c1]
+    temp_list = []
+    if 'x' in intersect_result:
+        # check if c1.min_x is between c2.min_x and c2.max_x
+        # if so, need to split c2 by c1.min_x
+        if c1.min_x >= c2.min_x and c1.min_x <= c2.max_x:
+            c2_split = c2.split('x', c1.min_x)
+            # if c1.max_x is also between c2.min_x and c2.max_x
+            # need to split it again
+            if c1.max_x >= c2.min_x and c1.max_x <= c2.max_x:       
+                c2_2nd_split = c2_split[1].split('x', c1.max_x)
+                temp_list = c2_split[0] + c2_2nd_split
+            else:
+                temp_list = c2_split
+        # same for c1.max_x
+        elif c1.max_x >= c2.min_x and c1.max_x <= c2.max_x:
+            c2_split = c2.split('x', c1.max_x)
+            temp_list = c2_split 
+    
+
+
+    return return_list + temp_list

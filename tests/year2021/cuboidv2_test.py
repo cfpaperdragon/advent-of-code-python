@@ -3,6 +3,7 @@ sys.path.insert(0, '../')
 
 from aoc.year2021.cuboidv2 import Cuboid
 from aoc.year2021.cuboidv2 import cuboid_intersect
+from aoc.year2021.cuboidv2 import intersect_and_split
 
 def test_create():
     new_cuboid = Cuboid(1, 2, 3, 4, 5, 6, 1)
@@ -45,3 +46,32 @@ def test_intersect():
     c5 = Cuboid(0, 2, 0, 2, 0, 2, 1)
     result = cuboid_intersect(c1, c5)
     assert len(result) == 3
+
+
+def test_split_cuboid():
+    c = Cuboid(0, 2, 0, 2, 0, 2, 1)
+    # split over x=1
+    result = c.split('x', 1)
+    assert len(result) == 2
+    assert result[0].max_x == 1
+    assert result[1].min_x == 2
+    # split over y=1
+    result = c.split('y', 1)
+    assert len(result) == 2
+    assert result[0].max_y == 1
+    assert result[1].min_y == 2
+    # split over z=1
+    result = c.split('z', 1)
+    assert len(result) == 2
+    assert result[0].max_z == 1
+    assert result[1].min_z == 2
+
+
+def test_intersect_and_split():
+    c1 = Cuboid(0, 2, 0, 2, 0, 2, 1)
+    c2 = Cuboid(1, 3, 1, 3, 1, 3, 1)
+    # keep c1 the same, chop up c2 and return the parts don't intersect
+    result = intersect_and_split(c1, c2)
+    for c in result:
+        c.print()
+    assert len(result) == 4
