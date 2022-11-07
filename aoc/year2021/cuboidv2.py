@@ -56,26 +56,26 @@ class Cuboid:
 
 def cuboid_intersect_x(c1, c2):
     x_values = []
-    if c2.min_x >= c1.min_x and c2.min_x <= c1.max_x:
-        x_values.append(c2.min_x)
-    if c2.max_x >= c1.min_x and c2.max_x <= c1.max_x:
-        x_values.append(c2.max_x)
+    if c1.min_x >= c2.min_x and c1.min_x <= c2.max_x:
+        x_values.append(c1.min_x)
+    if c1.max_x >= c2.min_x and c1.max_x <= c2.max_x:
+        x_values.append(c1.max_x)
     return x_values
 
 def cuboid_intersect_y(c1, c2):
     y_values = []
-    if c2.min_y >= c1.min_y and c2.min_y <= c1.max_y:
-        y_values.append(c2.min_y)
-    if c2.max_y >= c1.min_y and c2.max_y <= c1.max_y:
-        y_values.append(c2.max_y)
+    if c1.min_y >= c2.min_y and c1.min_y <= c2.max_y:
+        y_values.append(c1.min_y)
+    if c1.max_y >= c2.min_y and c1.max_y <= c2.max_y:
+        y_values.append(c1.max_y)
     return y_values
 
 def cuboid_intersect_z(c1, c2):
     z_values = []
-    if c2.min_z >= c1.min_z and c2.min_z <= c1.max_z:
-        z_values.append(c2.min_z)
-    if c2.max_z >= c1.min_z and c2.max_z <= c1.max_z:
-        z_values.append(c2.max_z)
+    if c1.min_z >= c2.min_z and c1.min_z <= c2.max_z:
+        z_values.append(c1.min_z)
+    if c1.max_z >= c2.min_z and c1.max_z <= c2.max_z:
+        z_values.append(c1.max_z)
     return z_values
 
 def cuboid_intersect(c1, c2):
@@ -100,6 +100,7 @@ def cuboid_intersect_and_split_x(c1, c_list):
 
 def intersect_and_split(c1, c2):
     intersect_result = cuboid_intersect(c1, c2)
+    print(intersect_result)
     if len(intersect_result) == 0:
         return [c1, c2]
     return_list = [c1]
