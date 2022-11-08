@@ -55,27 +55,34 @@ class Cuboid:
         return [c1, c2]
 
 def cuboid_intersect_x(c1, c2):
+    # check if c2 intersects with c1 on the x axis
+    # returns values that are between c1.min_x and c1.max_x
+    # if empty - no interception
+    # if one, c2 is partially inside c1
+    # if two, c2 is completely inside c1 (x axis)
     x_values = []
-    if c1.min_x >= c2.min_x and c1.min_x <= c2.max_x:
-        x_values.append(c1.min_x)
-    if c1.max_x >= c2.min_x and c1.max_x <= c2.max_x:
-        x_values.append(c1.max_x)
-    return x_values
+    # c2.min_x is between c1.min_x and c1.max_x
+    if c2.min_x >= c1.min_x and c2.min_x <= c1.max_x:
+        x_values.append(c2.min_x)
+    # c2.max_y is between c1.min_x and c1.max_x
+    if c2.max_x >= c1.min_x and c2.max_x <= c1.max_x:
+        x_values.append(c2.max_x)
+    return x_values 
 
 def cuboid_intersect_y(c1, c2):
     y_values = []
-    if c1.min_y >= c2.min_y and c1.min_y <= c2.max_y:
-        y_values.append(c1.min_y)
-    if c1.max_y >= c2.min_y and c1.max_y <= c2.max_y:
-        y_values.append(c1.max_y)
+    if c2.min_y >= c1.min_y and c2.min_y <= c1.max_y:
+        y_values.append(c2.min_y)
+    if c2.max_y >= c1.min_y and c2.max_y <= c1.max_y:
+        y_values.append(c2.max_y)
     return y_values
 
 def cuboid_intersect_z(c1, c2):
     z_values = []
-    if c1.min_z >= c2.min_z and c1.min_z <= c2.max_z:
-        z_values.append(c1.min_z)
-    if c1.max_z >= c2.min_z and c1.max_z <= c2.max_z:
-        z_values.append(c1.max_z)
+    if c2.min_z >= c1.min_z and c2.min_z <= c1.max_z:
+        z_values.append(c2.min_z)
+    if c2.max_z >= c1.min_z and c2.max_z <= c1.max_z:
+        z_values.append(c2.max_z)
     return z_values
 
 def cuboid_intersect(c1, c2):
@@ -90,38 +97,3 @@ def cuboid_intersect(c1, c2):
     if len(result_z) > 0:
         result['z'] = result_z
     return result
-
-
-def cuboid_intersect_and_split_x(c1, c_list):
-    # this is very complicated
-    return
-
-
-
-def intersect_and_split(c1, c2):
-    intersect_result = cuboid_intersect(c1, c2)
-    print(intersect_result)
-    if len(intersect_result) == 0:
-        return [c1, c2]
-    return_list = [c1]
-    temp_list = []
-    if 'x' in intersect_result:
-        # check if c1.min_x is between c2.min_x and c2.max_x
-        # if so, need to split c2 by c1.min_x
-        if c1.min_x >= c2.min_x and c1.min_x <= c2.max_x:
-            c2_split = c2.split('x', c1.min_x)
-            # if c1.max_x is also between c2.min_x and c2.max_x
-            # need to split it again
-            if c1.max_x >= c2.min_x and c1.max_x <= c2.max_x:       
-                c2_2nd_split = c2_split[1].split('x', c1.max_x)
-                temp_list = c2_split[0] + c2_2nd_split
-            else:
-                temp_list = c2_split
-        # same for c1.max_x
-        elif c1.max_x >= c2.min_x and c1.max_x <= c2.max_x:
-            c2_split = c2.split('x', c1.max_x)
-            temp_list = c2_split 
-    
-
-
-    return return_list + temp_list
