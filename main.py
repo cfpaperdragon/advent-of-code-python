@@ -23,7 +23,9 @@ start = time.time()
 file_content = aoc.common.process_input.read_file("input\\year" + year + "\\day" + day + "\\input.txt")  
 process_function = int
 if year == "2021" and day == "22":
-    process_function = aoc.common.process_input.process_reboot_steps_line      
+    process_function = aoc.common.process_input.process_reboot_steps_line
+elif year == "2022" and day == "01":
+    process_function = str      
 input_content = aoc.common.process_input.to_function_list(file_content, process_function)
 if part == "1":
     result = module.calculate_part1(input_content)
