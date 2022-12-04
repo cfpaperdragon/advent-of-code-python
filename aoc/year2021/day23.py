@@ -15,7 +15,7 @@ def prepare_game(start_positions):
 
     for sp in start_positions:
         content_map[sp[0]] = sp[1]
-        amphipods[sp[1]] = sp[0]
+        amphipods[sp[1]] += [sp[0]]
     return content_map, amphipods
 
 def is_end_state(content_map):
