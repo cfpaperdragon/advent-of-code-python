@@ -29,7 +29,9 @@ elif year == "2022" and day == "01":
 elif year == "2022" and day == "02":
     process_function = str   
 elif year == "2022" and day == "03":
-    process_function = str     
+    process_function = str   
+elif year == "2022" and day == "04":
+    process_function = str    
 input_content = aoc.common.process_input.to_function_list(file_content, process_function)
 if part == "1":
     result = module.calculate_part1(input_content)
