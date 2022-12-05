@@ -18,6 +18,14 @@ def to_function_list(file, function):
         result.append(value)
     return result
 
+def to_str_list_no_strip(file):
+    result = []
+    file_lines = file.splitlines()
+    for line in file_lines:
+        value = line
+        result.append(value)
+    return result
+
 def process_reboot_steps_line(file_line):
     '''
     transform this: 
