@@ -111,5 +111,30 @@ def calculate_part1(input_list):
     return result
 
 def calculate_part2(input_list):
-    return 0
+    tree, root = build_dir_tree(input_list)
+    calculate_dir_size(tree, root)
+
+    total_size = 70000000
+    unused_needed = 30000000
+
+    # get all dirs
+    size_list = []
+    for key in tree.keys():
+        if tree[key][i_type] == 'd':
+            size_list.append(tree[key][i_size])
+
+    size_list.sort()
+
+    current_size = tree[root][i_size]
+    max_size = total_size - unused_needed
+    need_to_free = current_size - max_size
+
+    # need minimum that is bigger than need_to_free
+    result = 0
+    for size in size_list:
+        if size > need_to_free:
+            result = size
+            break
+
+    return result
 
