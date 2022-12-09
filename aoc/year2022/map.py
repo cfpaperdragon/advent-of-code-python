@@ -18,7 +18,7 @@ class Map2d:
         for y in y_keys:
             string = "y=" + str(y) + " "
             for x in x_keys:
-                string += self.map.get(x, y, 0)
+                string += str(self.map.get(x, y, 0))
             print(string)
         
     def count(self, function):
@@ -31,3 +31,6 @@ class Map2d:
                 if function(self.map.get(x, y, 0)):
                     count += 1
         return count
+
+    def get(self, x, y):
+        return self.map.get(x, y, 0)

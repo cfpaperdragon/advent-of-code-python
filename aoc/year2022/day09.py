@@ -113,5 +113,53 @@ def calculate_part1(input_list):
     result = rope_map.count(lambda a: a == '#')
     return result
 
+def move_all_rope(rope_map, rope, direction, amount):
+    while amount > 0:
+        amount -= 1
+        rope = move_one_all_rope(rope_map, rope, direction)
+    # print_rope_segments(rope, '.')
+    return rope
+    
+def move_one_all_rope(rope_map, rope, direction):
+    new_pos = rope.copy()
+    # head moves always
+    new_pos[0] = move_head_one(rope[0], direction)
+    for i in range(1, 10):
+        new_pos[i] = move_tail_if_needed(new_pos[i-1], rope[i])
+        if new_pos[i] == rope[i]:
+            break # this segment didn't move, no point continuing
+        if i == 9: # reached the last segment aka tail
+            rope_map.set(new_pos[i][0], new_pos[i][1], ".", "#")
+    return new_pos
+
+def print_rope_segments(rope, start_value):
+    empty_map = Map2d(0, 5, 0, 4, start_value)
+    for i in range(10):
+        if empty_map.get(rope[i][0], rope[i][1]) == start_value:
+            empty_map.set(rope[i][0], rope[i][1], start_value, i)
+    empty_map.print()
+
 def calculate_part2(input_list):
-    return 0
+    rope_map = Map2d(0, 5, 0, 4, '.')
+    start = (0, 0)
+    rope = {
+        0: start,
+        1: start,
+        2: start,
+        3: start,
+        4: start,
+        5: start,
+        6: start,
+        7: start,
+        8: start,
+        9: start
+    }
+    for input in input_list:
+        parts = input.split(' ')
+        direction = parts[0]
+        amount = int(parts[1])
+        # print(rope)
+        rope = move_all_rope(rope_map, rope, direction, amount)
+    rope_map.set(0, 0, '.', '#') # set start position
+    count = rope_map.count(lambda a: a == '#')
+    return count
