@@ -42,5 +42,14 @@ class Map2d:
                     count += 1
         return count
 
+    def max_value(self):
+        all_keys = self.map.get_keys('all', False)
+        x_keys = all_keys[0]
+        y_keys = all_keys[1]
+        max_list = []
+        for y in y_keys:
+            max_list.append(max(list(self.map.dict[0][y].values())))
+        return max(max_list)
+
     def get(self, x, y):
         return self.map.get(x, y, 0)
