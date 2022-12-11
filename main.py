@@ -41,7 +41,9 @@ elif year == "2022" and day == "08":
 elif year == "2022" and day == "09":
     process_function = str  
 elif year == "2022" and day == "10":
-    process_function = str      
+    process_function = str   
+elif year == "2022" and day == "11":
+    process_function = str       
 if year == "2022" and day == "05":
     input_content = aoc.common.process_input.to_str_list_no_strip(file_content)   
 else:     
