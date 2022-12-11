@@ -81,5 +81,50 @@ def calculate_part1(input_list):
     result = visibility_map.count(count_lambda)
     return result
 
+def get_view_direction(direction, map, origin_x, origin_y, height, max_x, max_y):
+    if direction == 'left':
+        lambda_x = lambda a: a-1
+        lambda_y = lambda b: b
+    elif direction == 'right':
+        lambda_x = lambda a: a+1
+        lambda_y = lambda b: b
+    elif direction == 'up':
+        lambda_x = lambda a: a
+        lambda_y = lambda b: b-1
+    elif direction == 'down':
+        lambda_x = lambda a: a
+        lambda_y = lambda b: b+1
+    else:
+        raise Exception("invalid direction: " + direction)
+
+    x = lambda_x(origin_x)
+    y = lambda_y(origin_y)
+
+    checked_value = map.get(x, y)
+    if checked_value >= height:
+        return 1
+    elif x == 0 or y == 0 or x == max_x or y == max_y:
+        return 1
+    else:
+        return 1 + get_view_direction(direction, map, x, y, height, max_x, max_y)
+
 def calculate_part2(input_list):
-    return 0
+    x_size = len(input_list[0])
+    y_size = len(input_list)
+    tree_map = load_map(input_list)
+    scenic_score = Map2d(0, x_size-1, 0, y_size-1, 0)
+
+    for y in range(1, y_size - 1):
+        for x in range(1, x_size - 1):
+            # print(x,y)
+            height = tree_map.get(x, y)
+            left = get_view_direction("left", tree_map, x, y, height, x_size-1, y_size-1)
+            right = get_view_direction("right", tree_map, x, y, height, x_size-1, y_size-1)
+            up = get_view_direction("up", tree_map, x, y, height, x_size-1, y_size-1)
+            down = get_view_direction("down", tree_map, x, y, height, x_size-1, y_size-1)
+            
+            score = left*right*up*down
+            scenic_score.set(x, y, 0, score)
+    
+    scenic_score.print_asc()
+    return scenic_score.max_value()
