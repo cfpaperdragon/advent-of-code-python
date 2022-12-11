@@ -36,6 +36,8 @@ elif year == "2022" and day == "06":
     process_function = str  
 elif year == "2022" and day == "07":
     process_function = str  
+elif year == "2022" and day == "08":
+    process_function = str  
 elif year == "2022" and day == "09":
     process_function = str  
     

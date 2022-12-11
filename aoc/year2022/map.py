@@ -20,6 +20,16 @@ class Map2d:
             for x in x_keys:
                 string += str(self.map.get(x, y, 0))
             print(string)
+
+    def print_asc(self):
+        all_keys = self.map.get_keys('all', True)
+        x_keys = all_keys[0]
+        y_keys = all_keys[1]
+        for y in y_keys:
+            string = ""
+            for x in x_keys:
+                string += str(self.map.get(x, y, 0))
+            print(string)
         
     def count(self, function):
         all_keys = self.map.get_keys('all', False)
