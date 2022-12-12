@@ -53,3 +53,13 @@ class Map2d:
 
     def get(self, x, y):
         return self.map.get(x, y, 0)
+
+    def find_in_map(self, function_value):
+        all_keys = self.map.get_keys('all', False)
+        x_keys = all_keys[0]
+        y_keys = all_keys[1]
+        for y in y_keys:
+            for x in x_keys:
+                if function_value(self.map.get(x, y, 0)):
+                    return (x,y)
+        return -1
