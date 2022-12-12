@@ -24,26 +24,8 @@ file_content = aoc.common.process_input.read_file("input\\year" + year + "\\day"
 process_function = int
 if year == "2021" and day == "22":
     process_function = aoc.common.process_input.process_reboot_steps_line
-elif year == "2022" and day == "01":
+elif year == "2022":
     process_function = str      
-elif year == "2022" and day == "02":
-    process_function = str   
-elif year == "2022" and day == "03":
-    process_function = str   
-elif year == "2022" and day == "04":
-    process_function = str  
-elif year == "2022" and day == "06":
-    process_function = str  
-elif year == "2022" and day == "07":
-    process_function = str  
-elif year == "2022" and day == "08":
-    process_function = str  
-elif year == "2022" and day == "09":
-    process_function = str  
-elif year == "2022" and day == "10":
-    process_function = str   
-elif year == "2022" and day == "11":
-    process_function = str       
 if year == "2022" and day == "05":
     input_content = aoc.common.process_input.to_str_list_no_strip(file_content)   
 else:     
