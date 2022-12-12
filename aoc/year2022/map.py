@@ -63,3 +63,14 @@ class Map2d:
                 if function_value(self.map.get(x, y, 0)):
                     return (x,y)
         return -1
+
+    def find_all_in_map(self, function_value):
+        all_keys = self.map.get_keys('all', False)
+        x_keys = all_keys[0]
+        y_keys = all_keys[1]
+        result = []
+        for y in y_keys:
+            for x in x_keys:
+                if function_value(self.map.get(x, y, 0)):
+                    result.append((x,y))
+        return result
