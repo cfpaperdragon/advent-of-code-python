@@ -30,8 +30,12 @@ if year == "2022" and day == "05":
     input_content = aoc.common.process_input.to_str_list_no_strip(file_content)   
 else:     
     input_content = aoc.common.process_input.to_function_list(file_content, process_function)
+
 if part == "1":
-    result = module.calculate_part1(input_content)
+    if year == "2022" and day == "15":
+        result = module.calculate_part1(input_content, 2000000)
+    else:
+        result = module.calculate_part1(input_content)
 else:
     result = module.calculate_part2(input_content)
 
