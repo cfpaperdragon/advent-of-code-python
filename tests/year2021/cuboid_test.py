@@ -1,6 +1,3 @@
-import sys
-sys.path.insert(0, '../')
-
 from aoc.year2021.cuboid import Cuboid
 
 def test_create():

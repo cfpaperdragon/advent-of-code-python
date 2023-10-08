@@ -1,4 +1,10 @@
 # aoc.common.process_input
+from pathlib import Path
+
+
+def get_filename(forward_slash_path):
+    return Path(forward_slash_path)
+
 
 def read_file(file_path):
     fileContent = ""

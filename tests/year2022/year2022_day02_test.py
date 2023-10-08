@@ -1,6 +1,3 @@
-import sys
-sys.path.insert(0, '../')
-
 import aoc.common.process_input
 import aoc.year2022.day02
 
