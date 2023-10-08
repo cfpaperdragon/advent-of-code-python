@@ -26,7 +26,8 @@ def run_aoc(year, day, part):
     module_name = "aoc.year" + year + ".day" + day 
     module = import_module(module_name)
 
-    file_content = aoc.common.process_input.read_file("input\\year" + year + "\\day" + day + "\\input.txt")  
+    # TODO: need to make the path system agnostic
+    file_content = aoc.common.process_input.read_file("../input/year" + year + "/day" + day + "/input.txt")  
     process_function = int
     if year == "2021" and day == "22":
         process_function = aoc.common.process_input.process_reboot_steps_line
