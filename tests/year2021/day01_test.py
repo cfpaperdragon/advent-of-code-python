@@ -1,9 +1,7 @@
 import aoc.common.process_input
 import aoc.year2021.day01
+import ..day01_test
 
-#TODO: how to set this up to reuse code and make next tests easier to do
-#1. I don't want to depend on file order to set the path
-#2. I want to be able to run individual files or folders of tests
 year = "2021"
 day = "01"
 testname = "example.txt"
