@@ -6,6 +6,10 @@ def get_filename(forward_slash_path):
     return Path(forward_slash_path)
 
 
+def get_filename_for_day(year, day, filename):
+    return get_filename(f"../input/year{year}/day{day}/{filename}")
+
+
 def read_file(file_path):
     fileContent = ""
     with open(file_path) as file:
