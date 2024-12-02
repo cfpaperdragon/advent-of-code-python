@@ -27,11 +27,12 @@ def run_aoc(year, day, part):
     module = import_module(module_name)
 
     filename = aoc.common.process_input.get_filename_for_day(year, day, "input.txt")
+    print(filename)
     file_content = aoc.common.process_input.read_file(filename)  
     process_function = int
     if year == "2021" and day == "22":
         process_function = aoc.common.process_input.process_reboot_steps_line
-    elif year == "2022" or year == "2023":
+    elif year == "2022" or year == "2023" or year == "2024":
         process_function = str      
     if year == "2022" and day == "05":
         input_content = aoc.common.process_input.to_str_list_no_strip(file_content)   
