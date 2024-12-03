@@ -19,6 +19,10 @@ def test_is_report_safe():
     assert result
     result = aoc.year2024.day02.is_report_safe([1, 2, 7, 8, 9])
     assert not result
+    result = aoc.year2024.day02.is_report_safe([77, 74, 77, 75, 73, 72])
+    assert not result
+    result = aoc.year2024.day02.is_report_safe([10, 14, 15, 17, 19])
+    assert not result
 
 
 def test_read_input():
@@ -31,6 +35,6 @@ def test_calculate_part2():
     fileContent = read_file(year, day, testname)        
     input_content = aoc.common.process_input.to_function_list(fileContent, str)
     result = aoc.year2024.day02.calculate_part2(input_content)
-    assert result != 1
+    assert result == 4
 
 

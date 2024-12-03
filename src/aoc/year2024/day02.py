@@ -17,9 +17,13 @@ def is_report_safe(report):
     if first_level < second_level:
         # print("inc")
         inc = True
+        if (second_level - first_level) not in [1,2,3]:
+            return False
     elif first_level > second_level:
         # print("desc")
         inc = False
+        if (first_level - second_level) not in [1,2,3]:
+            return False
     else:
         return False
     
@@ -51,13 +55,32 @@ def is_report_safe(report):
 def calculate_part1(input_list):
     reports = process_input_list(input_list)
     count_safe = 0
-    print(reports)
+    # print(reports)
     for r in reports:
-        print(r)
         if is_report_safe(r):
+            # print(r)
             count_safe += 1
     return count_safe
 
 
-def calculate_part2(input_list):   
-    return 0
+def is_safe_with_problem_dampener(report):
+    for i in range(len(report)):
+        new_report = report.copy()
+        new_report.pop(i)
+        if is_report_safe(new_report):
+            return True
+    return False
+
+def calculate_part2(input_list):  
+    reports = process_input_list(input_list)
+    count_safe = 0
+    # print(reports)
+    for r in reports:
+        if is_report_safe(r):
+            # print(r)
+            count_safe += 1
+        else:
+            # problem dampener
+            if is_safe_with_problem_dampener(r):
+                count_safe += 1
+    return count_safe
