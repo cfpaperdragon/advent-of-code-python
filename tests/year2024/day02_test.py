@@ -1,5 +1,4 @@
 import aoc.common.process_input
-import aoc.year2024.day01
 import aoc.year2024.day02
 from ..common_test import read_file
 
