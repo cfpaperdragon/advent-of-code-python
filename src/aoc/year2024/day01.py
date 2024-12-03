@@ -31,4 +31,15 @@ def calculate_part1(input_list):
 
 
 def calculate_part2(input_list):   
-    return 0
+    left, right = process_input_list(input_list)
+    right_lookup = {}
+    for i in right:
+        if i in right_lookup:
+            right_lookup[i] = right_lookup[i] + 1
+        else:
+            right_lookup[i] = 1
+    similarity_score = 0
+    for e in left:
+        if e in right_lookup:
+            similarity_score += e * right_lookup[e]
+    return similarity_score
