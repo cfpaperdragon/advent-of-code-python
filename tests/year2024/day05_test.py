@@ -22,5 +22,5 @@ def test_calculate_part2():
     fileContent = read_file(year, day, testname)        
     input_content = aoc.common.process_input.to_function_list(fileContent, str)
     result = aoc.year2024.day05.calculate_part2(input_content)
-    assert result == 0
+    assert result == 123
 
