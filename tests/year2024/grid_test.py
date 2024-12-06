@@ -25,3 +25,17 @@ def test_grid_create():
     assert "X"  == pos_9_9
     assert "."  == pos_10_10
 
+def test_grid_print():
+    fileContent = read_file(year, "06", testname)        
+    input_content = aoc.common.process_input.to_function_list(fileContent, str)
+    map = Grid2d(input_content, len(input_content[0].strip()), len(input_content))
+    map.print()
+    assert True
+
+
+def test_grid_character_pos():
+    fileContent = read_file(year, "06", testname)        
+    input_content = aoc.common.process_input.to_function_list(fileContent, str)
+    map = Grid2d(input_content, len(input_content[0].strip()), len(input_content), find_character = True, character = "^")
+    assert (4, 6) == map.character_pos
+    assert "^" == map.get(4, 6)
