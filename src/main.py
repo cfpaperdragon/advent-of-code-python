@@ -15,29 +15,31 @@ from aoc.common.import_utils import import_module
 def run_aoc(year, day, part):
     """Run a specific problem of Advent of Code.
 
-      Args:
-          year: the year of the problem 
-          day: the day of the problem (2 digits)
-          part: 1 or 2
+    Args:
+        year: the year of the problem
+        day: the day of the problem (2 digits)
+        part: 1 or 2
 
-      Returns:
-          Result of executing the problem if implemented.
+    Returns:
+        Result of executing the problem if implemented.
     """
-    module_name = "aoc.year" + year + ".day" + day 
+    module_name = "aoc.year" + year + ".day" + day
     module = import_module(module_name)
 
     filename = aoc.common.process_input.get_filename_for_day(year, day, "input.txt")
     print(filename)
-    file_content = aoc.common.process_input.read_file(filename)  
+    file_content = aoc.common.process_input.read_file(filename)
     process_function = int
     if year == "2021" and day == "22":
         process_function = aoc.common.process_input.process_reboot_steps_line
     elif year == "2022" or year == "2023" or year == "2024":
-        process_function = str      
+        process_function = str
     if year == "2022" and day == "05":
-        input_content = aoc.common.process_input.to_str_list_no_strip(file_content)   
-    else:     
-        input_content = aoc.common.process_input.to_function_list(file_content, process_function)
+        input_content = aoc.common.process_input.to_str_list_no_strip(file_content)
+    else:
+        input_content = aoc.common.process_input.to_function_list(
+            file_content, process_function
+        )
 
     if part == "1":
         if year == "2022" and day == "15":
@@ -50,7 +52,7 @@ def run_aoc(year, day, part):
     return result
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
     try:
         year = sys.argv[1]
@@ -62,11 +64,11 @@ if __name__ == '__main__':
         result = run_aoc(year, day, part)
         # record end time
         end = time.time()
-        print("Result:", result, "in", (end-start) * 10**3, "ms")
+        print("Result:", result, "in", (end - start) * 10**3, "ms")
     except IndexError:
         print("Missing parameter: needs to be called with 3 parameters: year day part")
-    
-    except ModuleNotFoundError as e: 
+
+    except ModuleNotFoundError as e:
         print(f"{e!r}", file=sys.stderr)
 
     finally:
